@@ -73,16 +73,15 @@ public class PlayerControllerScript : MonoBehaviour
                 }
             }
 
-            float normY = Mathf.Abs(y);
-            print(normY);
-            float cubeY = Mathf.Pow(normY, 1f / 3f);
+            //float normY = Mathf.Abs(y);
+            //float cubeY = Mathf.Pow(normY, 1f / 3f);
 
 
 
-            if (cubeY >= 1)
-            {
-                transform.localScale = new Vector3(5f / (2f * cubeY), 5f / (2f * cubeY), 5f / (2f * cubeY));
-            }
+            //if (cubeY >= 1)
+            //{
+                //transform.localScale = new Vector3(5f / (2f * cubeY), 5f / (2f * cubeY), 5f / (2f * cubeY));
+            //}
         }
 
 

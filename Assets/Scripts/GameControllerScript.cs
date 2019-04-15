@@ -41,7 +41,7 @@ public class GameControllerScript : MonoBehaviour
             highScoreText.GetComponent<TextMeshPro>().text = "High Score: " + highScore.ToString("0");
             highScoreText.GetComponent<MeshRenderer>().enabled = true;
         }
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
