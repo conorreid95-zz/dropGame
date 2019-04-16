@@ -13,6 +13,8 @@ public class GameControllerScript : MonoBehaviour
     GameObject toText;
     GameObject startText;
 
+    Camera mainCamera;
+
     GameObject highScoreText;
     GameObject currentScoreText;
 
@@ -28,6 +30,7 @@ public class GameControllerScript : MonoBehaviour
         player = GameObject.Find("Player");
         DontDestroyOnLoad(this);
 
+        mainCamera = Camera.main;
 
         tapText = GameObject.Find("TapText");
         toText = GameObject.Find("ToText");
@@ -41,15 +44,28 @@ public class GameControllerScript : MonoBehaviour
             highScoreText.GetComponent<TextMeshPro>().text = "High Score: " + highScore.ToString("0");
             highScoreText.GetComponent<MeshRenderer>().enabled = true;
         }
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player == null)
+        
+        
+    }
+
+    
+
+    private void FixedUpdate()
+    {
+        if (player == null)
         {
             player = GameObject.Find("Player");
+        }
+
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
         }
 
         if (tapText == null)
@@ -75,7 +91,7 @@ public class GameControllerScript : MonoBehaviour
                 highScoreText.GetComponent<TextMeshPro>().text = "High Score: " + highScore.ToString("0");
                 highScoreText.GetComponent<MeshRenderer>().enabled = true;
             }
-            
+
         }
 
         if (currentScoreText == null)
@@ -87,18 +103,15 @@ public class GameControllerScript : MonoBehaviour
         {
             CheckForFirstClick();
         }
-        
-    }
 
-    
 
-    private void FixedUpdate()
-    {
+
+
         if (player != null)
         {
             Vector3 desiredPosition = new Vector3(player.transform.position.x, player.transform.position.y - 13.84f, player.transform.position.z - 26.88f);
-            Vector3 smoothedPosition = Vector3.Lerp(Camera.main.transform.position, desiredPosition, 0.10f);
-            Camera.main.transform.position = smoothedPosition;
+            Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, desiredPosition, 0.10f);
+            mainCamera.transform.position = smoothedPosition;
 
         }
         
