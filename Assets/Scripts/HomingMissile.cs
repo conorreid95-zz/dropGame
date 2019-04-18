@@ -10,6 +10,8 @@ public class HomingMissile : MonoBehaviour
     private Rigidbody rb;
     public float speed = 5f;
     public float rotateSpeed = 2f;
+    public ParticleSystem rocketBoost;
+    ParticleSystem explosionEffect;
     bool once = false;
     public bool active = false;
 
@@ -17,7 +19,8 @@ public class HomingMissile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        rocketBoost = transform.GetChild(3).GetComponent<ParticleSystem>();
+        explosionEffect = transform.GetChild(4).GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -25,8 +28,6 @@ public class HomingMissile : MonoBehaviour
     {
         if (active)
         {
-
-
             Vector3 direction = target.position - transform.position;
             Quaternion toRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);

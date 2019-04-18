@@ -30,10 +30,30 @@ public class BoxMissileTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            missile1.GetComponent<HomingMissile>().active = true;
-            missile2.GetComponent<HomingMissile>().active = true;
-            missile3.GetComponent<HomingMissile>().active = true;
-            missile4.GetComponent<HomingMissile>().active = true;
+            if(missile1 != null)
+            {
+                missile1.GetComponent<HomingMissile>().active = true;
+                missile1.GetComponent<HomingMissile>().rocketBoost.Play();
+            }
+            if (missile2 != null)
+            {
+                missile2.GetComponent<HomingMissile>().active = true;
+                missile2.GetComponent<HomingMissile>().rocketBoost.Play();
+            }
+            if (missile3 != null)
+            {
+                missile3.GetComponent<HomingMissile>().active = true;
+                missile3.GetComponent<HomingMissile>().rocketBoost.Play();
+            }
+            if (missile4 != null)
+            {
+                missile4.GetComponent<HomingMissile>().active = true;
+                missile4.GetComponent<HomingMissile>().rocketBoost.Play();
+            }
+            
+            
+            
+            
         }
     }
 }

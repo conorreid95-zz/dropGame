@@ -1427,6 +1427,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
+    serializedVersion: 2
     enabled: 1
     mode: 0
     timeMode: 0
@@ -1544,7 +1545,7 @@ ParticleSystem:
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
-    randomRow: 1
+    rowMode: 1
     sprites:
     - sprite: {fileID: 0}
     flipU: 0
@@ -2373,8 +2374,61 @@ ParticleSystem:
     inWorldSpace: 0
     randomizePerFrame: 0
   ExternalForcesModule:
+    serializedVersion: 2
     enabled: 0
-    multiplier: 1
+    multiplierCurve:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
@@ -5539,31 +5593,31 @@ MonoBehaviour:
   - {x: -0.75, y: 0, z: 0}
   m_Textures0:
   - {x: 0, y: 0}
-  - {x: 0.29263547, y: 0.0000000024788207}
-  - {x: 0.14631785, y: 1.5814837}
+  - {x: 0.2926355, y: 0.000000002041837}
+  - {x: 0.14631787, y: 1.5814838}
   - {x: 0, y: 0}
   - {x: 0.0570904, y: 0.28701258}
   - {x: 0.75, y: 0}
   - {x: 0.27035996, y: -0.052087903}
-  - {x: 0.5629954, y: -0.052087903}
+  - {x: 0.56299543, y: -0.052087903}
   - {x: 0.41667768, y: 1.5293959}
   - {x: 0.0570904, y: 0.28701258}
   - {x: 0.21966994, y: 0.53033006}
   - {x: 0.75, y: 0}
   - {x: 0.4772845, y: -0.14833386}
   - {x: 0.76991993, y: -0.14833386}
-  - {x: 0.6236022, y: 1.4331499}
+  - {x: 0.6236023, y: 1.4331499}
   - {x: 0.21966994, y: 0.53033006}
   - {x: 0.46298742, y: 0.6929096}
   - {x: 0.75, y: 0}
-  - {x: 0.5892713, y: -0.27408522}
-  - {x: 0.88190687, y: -0.27408522}
-  - {x: 0.7355889, y: 1.3073987}
+  - {x: 0.5892713, y: -0.2740852}
+  - {x: 0.88190687, y: -0.2740852}
+  - {x: 0.7355889, y: 1.3073986}
   - {x: 0.46298742, y: 0.6929096}
   - {x: 0.75000006, y: 0.75}
   - {x: 0.75, y: 0}
-  - {x: 0.58927125, y: -0.41019756}
-  - {x: 0.8819067, y: -0.41019756}
+  - {x: 0.58927125, y: -0.4101976}
+  - {x: 0.8819067, y: -0.4101976}
   - {x: 0.7355889, y: 1.1712862}
   - {x: 0.75000006, y: 0.75}
   - {x: 1.0370126, y: 0.69290966}
@@ -5574,9 +5628,9 @@ MonoBehaviour:
   - {x: 1.0370126, y: 0.69290966}
   - {x: 1.2803301, y: 0.53033006}
   - {x: 0.75, y: 0}
-  - {x: 0.27035996, y: -0.6321949}
-  - {x: 0.5629954, y: -0.6321949}
-  - {x: 0.41667768, y: 0.94928896}
+  - {x: 0.27036005, y: -0.6321948}
+  - {x: 0.5629955, y: -0.6321948}
+  - {x: 0.4166777, y: 0.94928896}
   - {x: 1.2803301, y: 0.53033006}
   - {x: 1.4429096, y: 0.2870126}
   - {x: 0.75, y: 0}
@@ -5586,8 +5640,8 @@ MonoBehaviour:
   - {x: 1.4429096, y: 0.2870126}
   - {x: 1.5, y: -0.00000006556708}
   - {x: 0.75, y: 0}
-  - {x: -0.29263574, y: -0.6842829}
-  - {x: -0.00000029927472, y: -0.6842829}
+  - {x: -0.29263574, y: -0.68428284}
+  - {x: -0.00000029927472, y: -0.68428284}
   - {x: -0.1463179, y: 0.897201}
   - {x: 1.5, y: -0.00000006556708}
   - {x: 1.4429096, y: -0.28701258}
@@ -5616,9 +5670,9 @@ MonoBehaviour:
   - {x: 0.75, y: -0.75}
   - {x: 0.4629873, y: -0.6929096}
   - {x: 0.75, y: 0}
-  - {x: -0.7699198, y: -0.14833388}
+  - {x: -0.7699198, y: -0.14833389}
   - {x: -0.47728458, y: -0.14833389}
-  - {x: -0.6236022, y: 1.43315}
+  - {x: -0.6236022, y: 1.4331499}
   - {x: 0.4629873, y: -0.6929096}
   - {x: 0.21967, y: -0.5303302}
   - {x: 0.75, y: 0}
@@ -5637,15 +5691,15 @@ MonoBehaviour:
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
-  - {x: -0.1950905, y: 0, z: 0.9807853, w: -1}
-  - {x: -0.1950905, y: 0, z: 0.9807853, w: -1}
-  - {x: -0.1950905, y: 0, z: 0.9807853, w: -1}
+  - {x: -0.19509047, y: 0.0000000069309145, z: 0.98078525, w: -1}
+  - {x: -0.19509047, y: 0.0000000069309145, z: 0.98078525, w: -1}
+  - {x: -0.19509047, y: 0.0000000069309145, z: 0.98078525, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -0.55557024, y: -0.000000013861827, z: 0.83146966, w: -1}
-  - {x: -0.55557024, y: -0.000000013861827, z: 0.83146966, w: -1}
-  - {x: -0.55557024, y: -0.000000013861827, z: 0.83146966, w: -1}
+  - {x: -0.55557024, y: -0.00000001386183, z: 0.83146966, w: -1}
+  - {x: -0.55557024, y: -0.00000001386183, z: 0.83146966, w: -1}
+  - {x: -0.55557024, y: -0.00000001386183, z: 0.83146966, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -5655,9 +5709,9 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -0.98078525, y: 0, z: 0.19509044, w: -1}
-  - {x: -0.98078525, y: 0, z: 0.19509044, w: -1}
-  - {x: -0.98078525, y: 0, z: 0.19509044, w: -1}
+  - {x: -0.98078525, y: -0.0000000069309154, z: 0.19509044, w: -1}
+  - {x: -0.98078525, y: -0.0000000069309154, z: 0.19509044, w: -1}
+  - {x: -0.98078525, y: -0.0000000069309154, z: 0.19509044, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -5673,9 +5727,9 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -0.5555703, y: 0, z: -0.83146966, w: -1}
-  - {x: -0.5555703, y: 0, z: -0.83146966, w: -1}
-  - {x: -0.5555703, y: 0, z: -0.83146966, w: -1}
+  - {x: -0.55557024, y: 0, z: -0.8314696, w: -1}
+  - {x: -0.55557024, y: 0, z: -0.8314696, w: -1}
+  - {x: -0.55557024, y: 0, z: -0.8314696, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -5899,7 +5953,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -6716,7 +6770,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 60
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7229,6 +7283,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
+    serializedVersion: 2
     enabled: 1
     mode: 0
     timeMode: 0
@@ -7346,7 +7401,7 @@ ParticleSystem:
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
-    randomRow: 1
+    rowMode: 1
     sprites:
     - sprite: {fileID: 0}
     flipU: 0
@@ -8157,8 +8212,61 @@ ParticleSystem:
     inWorldSpace: 0
     randomizePerFrame: 0
   ExternalForcesModule:
+    serializedVersion: 2
     enabled: 0
-    multiplier: 1
+    multiplierCurve:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
@@ -10635,6 +10743,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 10
   rotateSpeed: 2
+  rocketBoost: {fileID: 0}
   active: 0
 --- !u!1 &4536400837955785607
 GameObject:

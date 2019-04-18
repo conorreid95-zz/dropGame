@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerControllerScript : MonoBehaviour
 {
     GameObject gameController;
     Rigidbody rigidbody;
     GameObject currentScoreText; //text for showing score on death
+    
 
     bool leftRightBool = true; //used to alternate left/right mvmt
     bool hasControl = true; //for taking control away when player hits object
     bool playerVisibleAndActive = false;
     bool newScoreShowing = false; //bool for the score that shows when player dies
 
+    float startTime = 0f;
+    float completedTime = 0f;
     float distanceTravelled = 0f;
 
     // Start is called before the first frame update
@@ -31,7 +35,7 @@ public class PlayerControllerScript : MonoBehaviour
         if (playerVisibleAndActive) //if player has control
         {
             GetInput(); //check for clicks to move left and right
-            distanceTravelled = Mathf.Abs(transform.position.y+4.55f); //keep record of distance travelled for scoring
+            distanceTravelled = Mathf.Abs(transform.position.y + 4.55f); //keep record of distance travelled for scoring
         }
 
         if (currentScoreText == null) //look for new score text if null
@@ -62,7 +66,7 @@ public class PlayerControllerScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (y < -1f)
+                if (y < -1.5f)
                 {
                     y = y * 0.7f;
                 }
@@ -102,14 +106,40 @@ public class PlayerControllerScript : MonoBehaviour
     {
         if (hasControl) //if collided and not dead yet
         {
-            gameController.GetComponent<GameControllerScript>().ProcessNewScore(distanceTravelled); //save distance score
-            currentScoreText.GetComponent<TextMeshPro>().text = distanceTravelled.ToString("0"); //update score text
-            currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible
-            newScoreShowing = true;
-            currentScoreText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y-3f, -1f); //move text close to position player died
-            rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y*0.3f, rigidbody.velocity.z); //slow down player a little
-            hasControl = false; //remove control ability
-            Invoke("ReloadLevel", 1.75f); //begin reloading scene
+            if (collision.gameObject.tag == "FinishLine")
+            {
+                completedTime = Time.time;
+                float totalTime = completedTime - startTime;
+                
+                gameController.GetComponent<GameControllerScript>().SetBestTimeOnLevel(totalTime);
+                float distancePercentage = (distanceTravelled / gameController.GetComponent<GameControllerScript>().levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
+                gameController.GetComponent<GameControllerScript>().ProcessNewScore(distanceTravelled); //save distance score
+                currentScoreText.GetComponent<TextMeshPro>().text = distancePercentage.ToString("0") + "%"; //update score text
+                currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible
+                newScoreShowing = true;
+                currentScoreText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text
+                hasControl = false; //remove control ability
+                Invoke("ReloadLevel", 1.75f); //begin reloading scene
+            }
+            else
+            {
+                
+                
+                //print("Total time onCollision" + totalTime.ToString());
+                float distancePercentage = (distanceTravelled / gameController.GetComponent<GameControllerScript>().levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
+                gameController.GetComponent<GameControllerScript>().ProcessNewScore(distanceTravelled); //save distance score
+                currentScoreText.GetComponent<TextMeshPro>().text = distancePercentage.ToString("0") + "%"; //update score text
+                currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible
+                newScoreShowing = true;
+                currentScoreText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text close to position player died
+                rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y * 0.3f, rigidbody.velocity.z); //slow down player a little
+                hasControl = false; //remove control ability
+                gameController.GetComponent<GameControllerScript>().showHighScore = true;
+                //gameController.GetComponent<GameControllerScript>().showBestTime = true;
+
+                Invoke("ReloadLevel", 1.75f); //begin reloading scene
+            }
+            
         }
         
         
@@ -123,9 +153,28 @@ public class PlayerControllerScript : MonoBehaviour
 
     public void makePlayerActive() //activated by gameManager to make player start falling and become active
     {
+        startTime = Time.time;
+        //print(startTime);
         playerVisibleAndActive = true;
         GetComponent<MeshRenderer>().enabled = true;
         rigidbody.useGravity = true;
+    }
+
+   
+    public void SwitchLevel()
+    {
+        gameController.GetComponent<GameControllerScript>().firstClicked = false;
+        gameController.GetComponent<GameControllerScript>().showHighScore = true;
+        gameController.GetComponent<GameControllerScript>().showBestTime = true;
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
    
 }
