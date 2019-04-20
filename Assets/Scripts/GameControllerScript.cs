@@ -18,6 +18,7 @@ public class GameControllerScript : MonoBehaviour
 
     GameObject highScoreText;
     GameObject currentScoreText;
+    GameObject currentTimeText;
 
     public bool started = false;
     public bool firstClicked = false;
@@ -58,6 +59,7 @@ public class GameControllerScript : MonoBehaviour
 
         highScoreText = GameObject.Find("HighScoreText");
         currentScoreText = GameObject.Find("CurrentScoreText");
+        currentTimeText = GameObject.Find("CurrentTimeText");
         bestTimeText = GameObject.Find("BestTimeText");
 
         highScore[0] = PlayerPrefs.GetFloat("highScore0", 0f);
@@ -162,6 +164,11 @@ public class GameControllerScript : MonoBehaviour
             currentScoreText = GameObject.Find("CurrentScoreText");
         }
 
+        if (currentTimeText == null)
+        {
+            currentTimeText = GameObject.Find("CurrentTimeText");
+        }
+
         if (!firstClicked || !started)
         {
             CheckForFirstClick();
@@ -259,7 +266,7 @@ public class GameControllerScript : MonoBehaviour
     {
         string returnString = "";
         float minutes = originalSeconds / 60f;
-        if(minutes <= 1f)
+        if(minutes < 1f)
         {
             returnString += "00:";
         }
@@ -277,18 +284,26 @@ public class GameControllerScript : MonoBehaviour
 
         if (originalSeconds < 1f)
         {
-            returnString += "00";
+            returnString += "00" + RoundToTwoDecimalPoints(originalSeconds);
         }
         else if (originalSeconds < 10f)
         {
-            returnString += "0" + Mathf.FloorToInt(originalSeconds);
+            returnString += "0" + RoundToTwoDecimalPoints(originalSeconds);
         }
         else
         {
-            returnString += Mathf.FloorToInt(originalSeconds);
+            returnString += RoundToTwoDecimalPoints(originalSeconds);
         }
         
 
         return returnString;
+    }
+
+    private string RoundToTwoDecimalPoints(float toRound)
+    {
+        string rounded = "";
+
+        rounded = toRound.ToString("0.00");
+        return rounded;
     }
 }

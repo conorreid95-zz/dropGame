@@ -10,12 +10,14 @@ public class PlayerControllerScript : MonoBehaviour
     GameObject gameController;
     Rigidbody rigidbody;
     GameObject currentScoreText; //text for showing score on death
-    
+    GameObject currentTimeText; //text for showing time on level completion
+
 
     bool leftRightBool = true; //used to alternate left/right mvmt
     bool hasControl = true; //for taking control away when player hits object
     bool playerVisibleAndActive = false;
     bool newScoreShowing = false; //bool for the score that shows when player dies
+    bool newTimeShowing = false; //bool for the time that shows when player completets level
 
     float startTime = 0f;
     float completedTime = 0f;
@@ -27,6 +29,7 @@ public class PlayerControllerScript : MonoBehaviour
         gameController = GameObject.Find("GameManager");
         rigidbody = GetComponent<Rigidbody>();
         currentScoreText = GameObject.Find("CurrentScoreText");
+        currentTimeText = GameObject.Find("CurrentTimeText");
     }
 
     // Update is called once per frame
@@ -46,6 +49,16 @@ public class PlayerControllerScript : MonoBehaviour
         {
             currentScoreText.transform.Translate(Vector3.back * 8f * Time.deltaTime); //move score text for effect
             currentScoreText.transform.Translate(Vector3.down * 2f * Time.deltaTime);
+        }
+
+        if (currentTimeText == null) //look for new score text if null
+        {
+            currentTimeText = GameObject.Find("CurrentTimeText");
+        }
+        else if (newTimeShowing) //if have ref to scoreText, and it is visible as player just died...
+        {
+            currentTimeText.transform.Translate(Vector3.back * 8f * Time.deltaTime); //move score text for effect
+            currentTimeText.transform.Translate(Vector3.down * 2f * Time.deltaTime);
         }
 
         if (Input.GetKey("escape"))
@@ -106,7 +119,7 @@ public class PlayerControllerScript : MonoBehaviour
     {
         if (hasControl) //if collided and not dead yet
         {
-            if (collision.gameObject.tag == "FinishLine")
+            if (collision.gameObject.tag == "FinishLine") //hit finish line. handle completed time
             {
                 completedTime = Time.time;
                 float totalTime = completedTime - startTime;
@@ -114,10 +127,16 @@ public class PlayerControllerScript : MonoBehaviour
                 gameController.GetComponent<GameControllerScript>().SetBestTimeOnLevel(totalTime);
                 float distancePercentage = (distanceTravelled / gameController.GetComponent<GameControllerScript>().levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
                 gameController.GetComponent<GameControllerScript>().ProcessNewScore(distanceTravelled); //save distance score
-                currentScoreText.GetComponent<TextMeshPro>().text = distancePercentage.ToString("0") + "%"; //update score text
-                currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible
-                newScoreShowing = true;
-                currentScoreText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text
+                //currentScoreText.GetComponent<TextMeshPro>().text = distancePercentage.ToString("0") + "%"; //update score text
+                //currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible
+                //newScoreShowing = true;
+                //currentScoreText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text
+
+                currentTimeText.GetComponent<TextMeshPro>().text = ConvertSecondsToMinutesAndSeconds(totalTime); //update time text
+                currentTimeText.GetComponent<MeshRenderer>().enabled = true; //make text visible
+                newTimeShowing = true;
+                currentTimeText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text
+
                 hasControl = false; //remove control ability
                 Invoke("ReloadLevel", 1.75f); //begin reloading scene
             }
@@ -176,5 +195,51 @@ public class PlayerControllerScript : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
-   
+
+
+    private string ConvertSecondsToMinutesAndSeconds(float originalSeconds)
+    {
+        string returnString = "";
+        float minutes = originalSeconds / 60f;
+        if (minutes < 1f)
+        {
+            returnString += "00:";
+        }
+        else if (minutes < 10f)
+        {
+            returnString += "0" + Mathf.FloorToInt(minutes) + ":";
+        }
+        else
+        {
+
+            returnString += Mathf.FloorToInt(minutes) + ":";
+        }
+
+        originalSeconds = originalSeconds - (60f * Mathf.FloorToInt(minutes));
+
+        if (originalSeconds < 1f)
+        {
+            returnString += "00" + RoundToTwoDecimalPoints(originalSeconds);
+        }
+        else if (originalSeconds < 10f)
+        {
+            returnString += "0" + RoundToTwoDecimalPoints(originalSeconds);
+        }
+        else
+        {
+            returnString += RoundToTwoDecimalPoints(originalSeconds);
+        }
+
+
+        return returnString;
+    }
+
+    private string RoundToTwoDecimalPoints(float toRound)
+    {
+        string rounded = "";
+
+        rounded = toRound.ToString("0.00");
+        return rounded;
+    }
+
 }
