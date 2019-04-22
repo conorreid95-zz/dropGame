@@ -192,6 +192,23 @@ public class PlayerControllerScript : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().buildIndex == 1)
         {
+            SceneManager.LoadScene(2);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            SceneManager.LoadScene(5);
+
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
             SceneManager.LoadScene(0);
         }
     }

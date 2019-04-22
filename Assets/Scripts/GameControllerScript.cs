@@ -25,23 +25,24 @@ public class GameControllerScript : MonoBehaviour
     public bool showHighScore = false;
     public bool showBestTime = false;
 
-    float[] highScore = new float[3];
+    float[] highScore = new float[6];
     float highScorePercentage = 0f;
     //public float[] levelLength = { -341f, 820.75f, 500f };
     public float[] levelLength;
     
     float currentScore = 0f;
 
-    int[] levelsFinished = new int[3];
-    float[] bestLevelTimes = new float[3];
+    int[] levelsFinished = new int[6];
+    float[] bestLevelTimes = new float[6];
     
 
     void Start()
     {
-        levelLength = new float[3];
+        levelLength = new float[6];
         levelLength[0] = 341f;
         levelLength[1] = 820.75f;
-        levelLength[2] = 821f;
+        levelLength[2] = 341f;
+        levelLength[3] = 391f;
 
 
         //print(levelLength[1]);
@@ -65,6 +66,9 @@ public class GameControllerScript : MonoBehaviour
         highScore[0] = PlayerPrefs.GetFloat("highScore0", 0f);
         highScore[1] = PlayerPrefs.GetFloat("highScore1", 0f);
         highScore[2] = PlayerPrefs.GetFloat("highScore2", 0f);
+        highScore[3] = PlayerPrefs.GetFloat("highScore3", 0f);
+        highScore[4] = PlayerPrefs.GetFloat("highScore4", 0f);
+        highScore[5] = PlayerPrefs.GetFloat("highScore5", 0f);
 
         levelsFinished[0] = PlayerPrefs.GetInt("level0FinishedPref", 0);
         bestLevelTimes[0] = PlayerPrefs.GetFloat("level0BestTime", 10000f);
@@ -76,7 +80,16 @@ public class GameControllerScript : MonoBehaviour
 
         levelsFinished[2] = PlayerPrefs.GetInt("level2FinishedPref", 0);
         bestLevelTimes[2] = PlayerPrefs.GetFloat("level2BestTime", 10000f);
-        
+
+        levelsFinished[3] = PlayerPrefs.GetInt("level3FinishedPref", 0);
+        bestLevelTimes[3] = PlayerPrefs.GetFloat("level3BestTime", 10000f);
+
+        levelsFinished[4] = PlayerPrefs.GetInt("level4FinishedPref", 0);
+        bestLevelTimes[4] = PlayerPrefs.GetFloat("level4BestTime", 10000f);
+
+        levelsFinished[5] = PlayerPrefs.GetInt("level5FinishedPref", 0);
+        bestLevelTimes[5] = PlayerPrefs.GetFloat("level5BestTime", 10000f);
+
 
 
         if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f)
