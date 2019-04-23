@@ -186,6 +186,8 @@ public class PlayerControllerScript : MonoBehaviour
         gameController.GetComponent<GameControllerScript>().showHighScore = true;
         gameController.GetComponent<GameControllerScript>().showBestTime = true;
 
+        /*
+         
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             SceneManager.LoadScene(1);
@@ -211,6 +213,9 @@ public class PlayerControllerScript : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+        */
+
+        SceneManager.LoadScene(4);
     }
 
 
