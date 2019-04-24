@@ -185,37 +185,9 @@ public class PlayerControllerScript : MonoBehaviour
         gameController.GetComponent<GameControllerScript>().firstClicked = false;
         gameController.GetComponent<GameControllerScript>().showHighScore = true;
         gameController.GetComponent<GameControllerScript>().showBestTime = true;
+        
 
-        /*
-         
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            SceneManager.LoadScene(1);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            SceneManager.LoadScene(2);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            SceneManager.LoadScene(0);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 3)
-        {
-            SceneManager.LoadScene(0);
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 4)
-        {
-            SceneManager.LoadScene(5);
-
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 5)
-        {
-            SceneManager.LoadScene(0);
-        }
-        */
-
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(0);
     }
 
 

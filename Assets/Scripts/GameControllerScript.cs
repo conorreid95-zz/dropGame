@@ -25,28 +25,25 @@ public class GameControllerScript : MonoBehaviour
     public bool showHighScore = false;
     public bool showBestTime = false;
 
-    float[] highScore = new float[6];
+    float[] highScore = new float[7];
     float highScorePercentage = 0f;
     //public float[] levelLength = { -341f, 820.75f, 500f };
     public float[] levelLength;
     
     float currentScore = 0f;
 
-    int[] levelsFinished = new int[6];
-    float[] bestLevelTimes = new float[6];
+    int[] levelsFinished = new int[7];
+    float[] bestLevelTimes = new float[7];
     
 
     void Start()
     {
-        levelLength = new float[6];
-        levelLength[0] = 341f;
-        levelLength[1] = 820.75f;
-        levelLength[2] = 341f;
-        levelLength[3] = 391f;
-
-
-        //print(levelLength[1]);
-        //print(levelLength[2]);
+        levelLength = new float[7];
+        levelLength[1] = 341f;
+        levelLength[2] = 820.75f;
+        levelLength[3] = 434f;
+        levelLength[4] = 391f;
+        
         player = GameObject.Find("Player");
         DontDestroyOnLoad(this);
 
@@ -63,23 +60,20 @@ public class GameControllerScript : MonoBehaviour
         currentTimeText = GameObject.Find("CurrentTimeText");
         bestTimeText = GameObject.Find("BestTimeText");
 
-        highScore[0] = PlayerPrefs.GetFloat("highScore0", 0f);
         highScore[1] = PlayerPrefs.GetFloat("highScore1", 0f);
         highScore[2] = PlayerPrefs.GetFloat("highScore2", 0f);
         highScore[3] = PlayerPrefs.GetFloat("highScore3", 0f);
         highScore[4] = PlayerPrefs.GetFloat("highScore4", 0f);
         highScore[5] = PlayerPrefs.GetFloat("highScore5", 0f);
-
-        levelsFinished[0] = PlayerPrefs.GetInt("level0FinishedPref", 0);
-        bestLevelTimes[0] = PlayerPrefs.GetFloat("level0BestTime", 10000f);
-        
+        highScore[6] = PlayerPrefs.GetFloat("highScore6", 0f);
 
         levelsFinished[1] = PlayerPrefs.GetInt("level1FinishedPref", 0);
         bestLevelTimes[1] = PlayerPrefs.GetFloat("level1BestTime", 10000f);
         
 
         levelsFinished[2] = PlayerPrefs.GetInt("level2FinishedPref", 0);
-        bestLevelTimes[2] = PlayerPrefs.GetFloat("level2BestTime", 10000f);
+        bestLevelTimes[2] = PlayerPrefs.GetFloat("leve21BestTime", 10000f);
+        
 
         levelsFinished[3] = PlayerPrefs.GetInt("level3FinishedPref", 0);
         bestLevelTimes[3] = PlayerPrefs.GetFloat("level3BestTime", 10000f);
@@ -90,13 +84,16 @@ public class GameControllerScript : MonoBehaviour
         levelsFinished[5] = PlayerPrefs.GetInt("level5FinishedPref", 0);
         bestLevelTimes[5] = PlayerPrefs.GetFloat("level5BestTime", 10000f);
 
+        levelsFinished[6] = PlayerPrefs.GetInt("level6FinishedPref", 0);
+        bestLevelTimes[6] = PlayerPrefs.GetFloat("level6BestTime", 10000f);
+
 
 
         if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f)
         {
             highScorePercentage =  (highScore[SceneManager.GetActiveScene().buildIndex] / levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
             //highScoreText.GetComponent<TextMeshPro>().text = "High Score: " + highScore.ToString("0");
-            highScoreText.GetComponent<TextMeshPro>().text = "Completion: " + highScorePercentage.ToString("0") + "%";
+            highScoreText.GetComponent<TextMeshPro>().text = highScorePercentage.ToString("0") + "%";
             highScoreText.GetComponent<MeshRenderer>().enabled = true;
         }
 
@@ -153,7 +150,7 @@ public class GameControllerScript : MonoBehaviour
             if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f && showHighScore)
             {
                 highScorePercentage = (highScore[SceneManager.GetActiveScene().buildIndex] / levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
-                highScoreText.GetComponent<TextMeshPro>().text = "Completion: " + highScorePercentage.ToString("0") + "%";
+                highScoreText.GetComponent<TextMeshPro>().text = highScorePercentage.ToString("0") + "%";
                 highScoreText.GetComponent<MeshRenderer>().enabled = true;
             }
 
@@ -220,7 +217,11 @@ public class GameControllerScript : MonoBehaviour
         }
         else if(started && !firstClicked)
         {
-            player.GetComponent<MeshRenderer>().enabled = true;
+            if(player != null)
+            {
+                player.GetComponent<MeshRenderer>().enabled = true;
+            }
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 started = true;

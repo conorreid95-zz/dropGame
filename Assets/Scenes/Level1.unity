@@ -1254,6 +1254,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwitchLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 1763890435558011, guid: 9ca2713ebfa21074298a400310476b6e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72a2652f3476985459adbc6e2e550379,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ca2713ebfa21074298a400310476b6e, type: 3}
 --- !u!224 &761843209 stripped

@@ -87,7 +87,7 @@ Material:
     - _Diffuse: 0.5
     - _DiffusePower: 1
     - _DstBlend: 0
-    - _FaceDilate: 0.357
+    - _FaceDilate: 0.236
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlossMapScale: 1
@@ -113,7 +113,7 @@ Material:
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.40995002
+    - _ScaleRatioC: 0.51884997
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
