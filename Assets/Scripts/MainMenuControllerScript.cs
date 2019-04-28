@@ -19,21 +19,29 @@ public class MainMenuControllerScript : MonoBehaviour
     GameObject button2;
     GameObject button3;
     GameObject button4;
+    GameObject button5;
+    GameObject button6;
 
     public Image tick1;
     public Image tick2;
     public Image tick3;
     public Image tick4;
+    public Image tick5;
+    public Image tick6;
 
     public GameObject percent1;
     public GameObject percent2;
     public GameObject percent3;
     public GameObject percent4;
+    public GameObject percent5;
+    public GameObject percent6;
 
     float level1Percent;
     float level2Percent;
     float level3Percent;
     float level4Percent;
+    float level5Percent;
+    float level6Percent;
 
     public float[] levelLength;
 
@@ -49,6 +57,8 @@ public class MainMenuControllerScript : MonoBehaviour
         levelLength[2] = 820.75f;
         levelLength[3] = 434f;
         levelLength[4] = 391f;
+        levelLength[5] = 240f;
+        levelLength[6] = 434f;
 
         highScore[1] = PlayerPrefs.GetFloat("highScore1", 0f);
         highScore[2] = PlayerPrefs.GetFloat("highScore2", 0f);
@@ -76,6 +86,16 @@ public class MainMenuControllerScript : MonoBehaviour
         {
             level4Percent = (highScore[4] / levelLength[4]) * 100f;
         }
+
+        if (highScore[5] > 0.01f)
+        {
+            level5Percent = (highScore[5] / levelLength[5]) * 100f;
+        }
+
+        if (highScore[6] > 0.01f)
+        {
+            level6Percent = (highScore[6] / levelLength[6]) * 100f;
+        }
         levelsFinished[1] = PlayerPrefs.GetInt("level1FinishedPref", 0);
         bestLevelTimes[1] = PlayerPrefs.GetFloat("level1BestTime", 10000f);
 
@@ -100,6 +120,8 @@ public class MainMenuControllerScript : MonoBehaviour
         tick2.enabled = false;
         tick3.enabled = false;
         tick4.enabled = false;
+        tick5.enabled = false;
+        tick6.enabled = false;
 
         gameController = GameObject.Find("GameManager");
     }
@@ -177,14 +199,47 @@ public class MainMenuControllerScript : MonoBehaviour
                 {
                     button4.GetComponent<TextMeshProUGUI>().enabled = false;
                 }
-
             }
+        }
 
-            
+        if (button5 == null)
+        {
+            button5 = GameObject.Find("BestTime5");
+
+            if (button5 != null)
+            {
+                if (levelsFinished[5] == 1)
+                {
+                    tick5.enabled = true;
+                    button5.GetComponent<TextMeshProUGUI>().text = ConvertSecondsToMinutesAndSeconds(bestLevelTimes[5]);
+                }
+                else
+                {
+                    button5.GetComponent<TextMeshProUGUI>().enabled = false;
+                }
+            }
+        }
+
+        if (button6 == null)
+        {
+            button6 = GameObject.Find("BestTime6");
+
+            if (button6 != null)
+            {
+                if (levelsFinished[6] == 1)
+                {
+                    tick6.enabled = true;
+                    button6.GetComponent<TextMeshProUGUI>().text = ConvertSecondsToMinutesAndSeconds(bestLevelTimes[6]);
+                }
+                else
+                {
+                    button6.GetComponent<TextMeshProUGUI>().enabled = false;
+                }
+            }
         }
 
 
-        if(percent1 == null)
+        if (percent1 == null)
         {
             percent1 = GameObject.Find("Percent1Text");
 
@@ -199,8 +254,7 @@ public class MainMenuControllerScript : MonoBehaviour
                     if (level1Percent > 0.01f)
                     {
                         percent1.GetComponent<TextMeshProUGUI>().text = level1Percent.ToString("0") + "%";
-                    }
-                    
+                    }                    
                 }
             }
         }
@@ -268,6 +322,48 @@ public class MainMenuControllerScript : MonoBehaviour
             }
         }
 
+        if (percent5 == null)
+        {
+            percent5 = GameObject.Find("Percent5Text");
+
+            if (percent5 != null)
+            {
+                if (levelsFinished[5] == 1)
+                {
+                    percent5.SetActive(false);
+                }
+                else
+                {
+                    if (level5Percent > 0.01f)
+                    {
+                        percent5.GetComponent<TextMeshProUGUI>().text = level5Percent.ToString("0") + "%";
+                    }
+
+                }
+            }
+        }
+
+        if (percent6 == null)
+        {
+            percent6 = GameObject.Find("Percent6Text");
+
+            if (percent6 != null)
+            {
+                if (levelsFinished[6] == 1)
+                {
+                    percent6.SetActive(false);
+                }
+                else
+                {
+                    if (level6Percent > 0.01f)
+                    {
+                        percent6.GetComponent<TextMeshProUGUI>().text = level6Percent.ToString("0") + "%";
+                    }
+
+                }
+            }
+        }
+
         if (gameController != null)
         {
             Destroy(gameController);
@@ -291,6 +387,14 @@ public class MainMenuControllerScript : MonoBehaviour
     public void LoadLevel4()
     {
         SceneManager.LoadScene(4);
+    }
+    public void LoadLevel5()
+    {
+        SceneManager.LoadScene(5);
+    }
+    public void LoadLevel6()
+    {
+        SceneManager.LoadScene(6);
     }
 
 

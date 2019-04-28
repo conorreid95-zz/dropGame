@@ -43,7 +43,9 @@ public class GameControllerScript : MonoBehaviour
         levelLength[2] = 820.75f;
         levelLength[3] = 434f;
         levelLength[4] = 391f;
-        
+        levelLength[5] = 240f;
+        levelLength[6] = 434f;
+
         player = GameObject.Find("Player");
         DontDestroyOnLoad(this);
 
@@ -72,7 +74,7 @@ public class GameControllerScript : MonoBehaviour
         
 
         levelsFinished[2] = PlayerPrefs.GetInt("level2FinishedPref", 0);
-        bestLevelTimes[2] = PlayerPrefs.GetFloat("leve21BestTime", 10000f);
+        bestLevelTimes[2] = PlayerPrefs.GetFloat("level2BestTime", 10000f);
         
 
         levelsFinished[3] = PlayerPrefs.GetInt("level3FinishedPref", 0);
@@ -189,7 +191,7 @@ public class GameControllerScript : MonoBehaviour
 
         if (player != null)
         {
-            Vector3 desiredPosition = new Vector3(player.transform.position.x, player.transform.position.y - 13.84f, player.transform.position.z - 26.88f);
+            Vector3 desiredPosition = new Vector3(player.transform.position.x, player.transform.position.y -13.42f, player.transform.position.z - 25.57f);
             Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, desiredPosition, 0.10f);
             mainCamera.transform.position = smoothedPosition;
 
@@ -238,6 +240,22 @@ public class GameControllerScript : MonoBehaviour
     public void LoadCurrentLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void LoadNextLevel()
+    {
+        int buildIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if(buildIndex < 6)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+        
 
     }
 

@@ -11,7 +11,16 @@ public class PlayerControllerScript : MonoBehaviour
     Rigidbody rigidbody;
     GameObject currentScoreText; //text for showing score on death
     GameObject currentTimeText; //text for showing time on level completion
+    [SerializeField] ParticleSystem victoryParticle;
+    [SerializeField] GameObject arch1;
+    [SerializeField] GameObject arch2;
+    [SerializeField] GameObject arch3;
+    [SerializeField] GameObject arch4;
+    [SerializeField] GameObject arch5;
+    [SerializeField] GameObject arch6;
+    [SerializeField] GameObject arch7;
 
+    public ParticleSystem explosion;
 
     bool leftRightBool = true; //used to alternate left/right mvmt
     bool hasControl = true; //for taking control away when player hits object
@@ -48,7 +57,7 @@ public class PlayerControllerScript : MonoBehaviour
         else if (newScoreShowing) //if have ref to scoreText, and it is visible as player just died...
         {
             currentScoreText.transform.Translate(Vector3.back * 8f * Time.deltaTime); //move score text for effect
-            currentScoreText.transform.Translate(Vector3.down * 2f * Time.deltaTime);
+            //currentScoreText.transform.Translate(Vector3.down * 2f * Time.deltaTime);
         }
 
         if (currentTimeText == null) //look for new score text if null
@@ -79,7 +88,7 @@ public class PlayerControllerScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (y < -1.5f)
+                if (y < -5.5f)
                 {
                     y = y * 0.7f;
                 }
@@ -136,9 +145,11 @@ public class PlayerControllerScript : MonoBehaviour
                 currentTimeText.GetComponent<MeshRenderer>().enabled = true; //make text visible
                 newTimeShowing = true;
                 currentTimeText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text
+                //currentTimeText.transform.position = new Vector3(0f,0f, -1f);
 
                 hasControl = false; //remove control ability
-                Invoke("ReloadLevel", 1.75f); //begin reloading scene
+                victoryParticle.Play();
+                Invoke("ReloadNextLevel", 2f); //begin reloading scene
             }
             else
             {
@@ -151,10 +162,64 @@ public class PlayerControllerScript : MonoBehaviour
                 currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible
                 newScoreShowing = true;
                 currentScoreText.transform.position = new Vector3(collision.contacts[0].point.x * 0.7f, collision.contacts[0].point.y - 3f, -1f); //move text close to position player died
+                
                 rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y * 0.3f, rigidbody.velocity.z); //slow down player a little
                 hasControl = false; //remove control ability
                 gameController.GetComponent<GameControllerScript>().showHighScore = true;
                 //gameController.GetComponent<GameControllerScript>().showBestTime = true;
+                GetComponent<SphereCollider>().enabled = false;
+                GetComponent<MeshRenderer>().enabled = false;
+                GetComponent<Rigidbody>().drag = 5f;
+                explosion.Play();
+                arch1.GetComponent<MeshRenderer>().enabled = true;
+                arch1.GetComponent<BoxCollider>().enabled = true;
+                arch1.AddComponent<Rigidbody>();
+                arch1.transform.parent = null;
+
+                arch2.GetComponent<MeshRenderer>().enabled = true;
+                arch2.GetComponent<BoxCollider>().enabled = true;
+                arch2.AddComponent<Rigidbody>();
+                arch2.transform.parent = null;
+
+                arch3.GetComponent<MeshRenderer>().enabled = true;
+                arch3.GetComponent<BoxCollider>().enabled = true;
+                arch3.AddComponent<Rigidbody>();
+                arch3.transform.parent = null;
+
+                arch4.GetComponent<MeshRenderer>().enabled = true;
+                arch4.GetComponent<BoxCollider>().enabled = true;
+                arch4.AddComponent<Rigidbody>();
+                arch4.transform.parent = null;
+
+                arch5.GetComponent<MeshRenderer>().enabled = true;
+                arch5.GetComponent<BoxCollider>().enabled = true;
+                arch5.AddComponent<Rigidbody>();
+                arch5.transform.parent = null;
+
+                arch6.GetComponent<MeshRenderer>().enabled = true;
+                arch6.GetComponent<BoxCollider>().enabled = true;
+                arch6.AddComponent<Rigidbody>();
+                arch6.transform.parent = null;
+
+                arch7.GetComponent<MeshRenderer>().enabled = true;
+                arch7.GetComponent<BoxCollider>().enabled = true;
+                arch7.AddComponent<Rigidbody>();
+                arch7.transform.parent = null;
+
+
+
+                //arch2.SetActive(true);
+                //arch2.transform.parent = null;
+                //arch3.SetActive(true);
+                //arch3.transform.parent = null;
+                //arch4.SetActive(true);
+                //arch4.transform.parent = null;
+                //arch5.SetActive(true);
+                //arch5.transform.parent = null;
+                //arch6.SetActive(true);
+                //arch6.transform.parent = null;
+                //arch7.SetActive(true);
+                //arch7.transform.parent = null;
 
                 Invoke("ReloadLevel", 1.75f); //begin reloading scene
             }
@@ -168,6 +233,12 @@ public class PlayerControllerScript : MonoBehaviour
     {
         gameController.GetComponent<GameControllerScript>().firstClicked = false;
         gameController.GetComponent<GameControllerScript>().LoadCurrentLevel();
+    }
+
+    void ReloadNextLevel()
+    {
+        gameController.GetComponent<GameControllerScript>().firstClicked = false;
+        gameController.GetComponent<GameControllerScript>().LoadNextLevel();
     }
 
     public void makePlayerActive() //activated by gameManager to make player start falling and become active
