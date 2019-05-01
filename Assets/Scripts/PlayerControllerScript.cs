@@ -157,6 +157,10 @@ public class PlayerControllerScript : MonoBehaviour
                 
                 //print("Total time onCollision" + totalTime.ToString());
                 float distancePercentage = (distanceTravelled / gameController.GetComponent<GameControllerScript>().levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
+                if(distancePercentage > 99.5f)
+                {
+                    distancePercentage = 99f;
+                }
                 gameController.GetComponent<GameControllerScript>().ProcessNewScore(distanceTravelled); //save distance score
                 currentScoreText.GetComponent<TextMeshPro>().text = distancePercentage.ToString("0") + "%"; //update score text
                 currentScoreText.GetComponent<MeshRenderer>().enabled = true; //make text visible

@@ -27,7 +27,6 @@ public class GameControllerScript : MonoBehaviour
 
     float[] highScore = new float[7];
     float highScorePercentage = 0f;
-    //public float[] levelLength = { -341f, 820.75f, 500f };
     public float[] levelLength;
     
     float currentScore = 0f;
@@ -39,12 +38,12 @@ public class GameControllerScript : MonoBehaviour
     void Start()
     {
         levelLength = new float[7];
-        levelLength[1] = 341f;
-        levelLength[2] = 820.75f;
-        levelLength[3] = 434f;
-        levelLength[4] = 391f;
-        levelLength[5] = 240f;
-        levelLength[6] = 434f;
+        levelLength[1] = 341.5f; 
+        levelLength[2] = 240.5f; 
+        levelLength[3] = 391.15f; 
+        levelLength[4] = 434.5f; 
+        levelLength[5] = 434.5f; 
+        levelLength[6] = 821.25f;
 
         player = GameObject.Find("Player");
         DontDestroyOnLoad(this);
@@ -94,6 +93,10 @@ public class GameControllerScript : MonoBehaviour
         if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f)
         {
             highScorePercentage =  (highScore[SceneManager.GetActiveScene().buildIndex] / levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
+            if(highScorePercentage > 99.49f)
+            {
+                highScorePercentage = 99f;
+            }
             //highScoreText.GetComponent<TextMeshPro>().text = "High Score: " + highScore.ToString("0");
             highScoreText.GetComponent<TextMeshPro>().text = highScorePercentage.ToString("0") + "%";
             highScoreText.GetComponent<MeshRenderer>().enabled = true;
@@ -152,6 +155,10 @@ public class GameControllerScript : MonoBehaviour
             if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f && showHighScore)
             {
                 highScorePercentage = (highScore[SceneManager.GetActiveScene().buildIndex] / levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
+                if (highScorePercentage > 99.49f)
+                {
+                    highScorePercentage = 99f;
+                }
                 highScoreText.GetComponent<TextMeshPro>().text = highScorePercentage.ToString("0") + "%";
                 highScoreText.GetComponent<MeshRenderer>().enabled = true;
             }
