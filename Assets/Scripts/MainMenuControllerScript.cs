@@ -71,55 +71,35 @@ public class MainMenuControllerScript : MonoBehaviour
         if(highScore[1] > 0.01f)
         {
             level1Percent = (highScore[1] / levelLength[1]) * 100f;
-            if(level1Percent > 99.5f)
-            {
-                level1Percent = 99f;
-            }
+            
         }
 
         if (highScore[2] > 0.01f)
         {
             level2Percent = (highScore[2] / levelLength[2]) * 100f;
-            if (level2Percent > 99.5f)
-            {
-                level2Percent = 99f;
-            }
+            
         }
 
         if (highScore[3] > 0.01f)
         {
             level3Percent = (highScore[3] / levelLength[3]) * 100f;
-            if (level3Percent > 99.5f)
-            {
-                level3Percent = 99f;
-            }
+          
         }
 
         if (highScore[4] > 0.01f)
         {
             level4Percent = (highScore[4] / levelLength[4]) * 100f;
-            if (level4Percent > 99.5f)
-            {
-                level4Percent = 99f;
-            }
+      
         }
 
         if (highScore[5] > 0.01f)
         {
             level5Percent = (highScore[5] / levelLength[5]) * 100f;
-            if (level5Percent > 99.5f)
-            {
-                level5Percent = 99f;
-            }
         }
 
         if (highScore[6] > 0.01f)
         {
             level6Percent = (highScore[6] / levelLength[6]) * 100f;
-            if (level6Percent > 99.5f)
-            {
-                level6Percent = 99f;
-            }
         }
         levelsFinished[1] = PlayerPrefs.GetInt("level1FinishedPref", 0);
         bestLevelTimes[1] = PlayerPrefs.GetFloat("level1BestTime", 10000f);

@@ -93,7 +93,7 @@ public class GameControllerScript : MonoBehaviour
         if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f)
         {
             highScorePercentage =  (highScore[SceneManager.GetActiveScene().buildIndex] / levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
-            if(highScorePercentage > 99.49f)
+            if(highScorePercentage > 99.49f && levelsFinished[SceneManager.GetActiveScene().buildIndex] == 0)
             {
                 highScorePercentage = 99f;
             }
@@ -155,7 +155,7 @@ public class GameControllerScript : MonoBehaviour
             if (highScore[SceneManager.GetActiveScene().buildIndex] > 0.01f && showHighScore)
             {
                 highScorePercentage = (highScore[SceneManager.GetActiveScene().buildIndex] / levelLength[SceneManager.GetActiveScene().buildIndex]) * 100f;
-                if (highScorePercentage > 99.49f)
+                if (highScorePercentage > 99.49f && levelsFinished[SceneManager.GetActiveScene().buildIndex] == 0)
                 {
                     highScorePercentage = 99f;
                 }
