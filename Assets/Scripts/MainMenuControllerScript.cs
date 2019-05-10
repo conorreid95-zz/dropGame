@@ -36,6 +36,8 @@ public class MainMenuControllerScript : MonoBehaviour
     public GameObject percent5;
     public GameObject percent6;
 
+    public GameObject infoText;
+
     float level1Percent;
     float level2Percent;
     float level3Percent;
@@ -372,6 +374,11 @@ public class MainMenuControllerScript : MonoBehaviour
             }
         }
 
+        if(infoText == null)
+        {
+            infoText = GameObject.Find("InfoText");
+        }
+
         if (gameController != null)
         {
             Destroy(gameController);
@@ -451,5 +458,13 @@ public class MainMenuControllerScript : MonoBehaviour
 
         rounded = toRound.ToString("0.00");
         return rounded;
+    }
+
+    public void ShowInfoText()
+    {
+        if(infoText != null)
+        {
+            infoText.GetComponent<TextMeshProUGUI>().text = "More Levels To Be Added Soon";
+        }
     }
 }
