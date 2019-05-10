@@ -20,6 +20,11 @@ public class PlayerControllerScript : MonoBehaviour
     [SerializeField] GameObject arch6;
     [SerializeField] GameObject arch7;
 
+    AudioSource audioData;
+
+    public AudioClip deathSound;
+    public AudioClip victorySound;
+
     public ParticleSystem explosion;
 
     bool leftRightBool = true; //used to alternate left/right mvmt
@@ -39,6 +44,7 @@ public class PlayerControllerScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         currentScoreText = GameObject.Find("CurrentScoreText");
         currentTimeText = GameObject.Find("CurrentTimeText");
+        audioData = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -149,6 +155,7 @@ public class PlayerControllerScript : MonoBehaviour
 
                 hasControl = false; //remove control ability
                 victoryParticle.Play();
+                audioData.PlayOneShot(victorySound);
                 Invoke("ReloadNextLevel", 2f); //begin reloading scene
             }
             else
@@ -175,6 +182,7 @@ public class PlayerControllerScript : MonoBehaviour
                 GetComponent<MeshRenderer>().enabled = false;
                 GetComponent<Rigidbody>().drag = 5f;
                 explosion.Play();
+                audioData.PlayOneShot(deathSound);
                 arch1.GetComponent<MeshRenderer>().enabled = true;
                 arch1.GetComponent<BoxCollider>().enabled = true;
                 arch1.AddComponent<Rigidbody>();
