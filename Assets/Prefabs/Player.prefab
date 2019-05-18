@@ -18887,7 +18887,7 @@ MonoBehaviour:
   arch6: {fileID: 1385969925}
   arch7: {fileID: 66890636}
   deathSound: {fileID: 8300000, guid: 993645b942f74424c931b159c6801f55, type: 3}
-  victorySound: {fileID: 8300000, guid: c3a8bbe426b780c4691ace1d934531d2, type: 3}
+  victorySound: {fileID: 8300000, guid: d596eec57f398ed4582f67b8b9c20613, type: 3}
   explosion: {fileID: 1950764977}
 --- !u!96 &8881981267168410606
 TrailRenderer:
